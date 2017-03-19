@@ -20,7 +20,7 @@
 <% if (templateLang === 'pug') { -%>
 <template lang="pug">
   #app
-    p {{ bar }}
+    p {{ foo }}
 </template>
 <% } else if (templateLang === 'html') { -%>
 <template>
@@ -33,7 +33,7 @@
   export default {
     data () {
       return {
-        foo: 'bar'
+        foo: 'Hello World!'
       }
     }
   }
