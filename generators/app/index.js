@@ -75,7 +75,7 @@ module.exports = class extends Generator {
       )
     }
   }
-  _install () {
+  install () {
     const dependencies = [
       'vue',
       'webpack',
