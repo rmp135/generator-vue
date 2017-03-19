@@ -1,6 +1,6 @@
 {
   "name": "@rmp135/generator-vue",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "files": [
     "generators"
   ],
