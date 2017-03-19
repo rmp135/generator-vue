@@ -39,7 +39,7 @@ module.exports = class extends Generator {
       { appname: kebabcase(this.options.appname) }
     )
     this.fs.copyTpl(
-      this.templatePath('.gitignore'),
+      this.templatePath('gitignore'),
       this.destinationPath('.gitignore')
     )
     this.fs.copyTpl(
