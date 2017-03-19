@@ -1,0 +1,15 @@
+{
+  "name": "@rmp135/generator-vue",
+  "version": "1.0.0",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "lodash.kebabcase": "^4.1.1",
+    "lodash.startcase": "^4.4.0",
+    "yeoman-generator": "^1.0.0"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "<%= appname %>",
+  "version": "0.0.1",
+  "author": {
+    "name": "<%= name %>",
+    "email": "<%= email %>"
+  },
+  "scripts": {
+    "build": "webpack"<% if (useKarma) { %>,
+    "test": "karma start"<% } %>
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "debug": true,
+          "targets": {
+            "browsers": [
+              "> 1%",
+              "last 2 versions"
+            ]
+          }
+        }
+      ]
+    ]
+  }
+}
