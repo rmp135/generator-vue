@@ -8,7 +8,7 @@
   "scripts": {
     "build": "webpack"<% if (useKarma) { %>,
     "test": "karma start"<% } %>
-  },
+  }<% if (babelPreset === 'env') { %>,
   "babel": {
     "presets": [
       [
@@ -24,5 +24,9 @@
         }
       ]
     ]
+  }<% } else if (babelPreset === 'latest') { %>,
+  "babel": {
+    "presets": ["latest"]
   }
+  <% } %>
 }

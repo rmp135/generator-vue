@@ -14,6 +14,11 @@ module.exports = class extends Generator {
   }
   prompting () {
     const prompts = [{
+      type: 'list',
+      name: 'babelPreset',
+      message: 'Babel Preset',
+      choices: ['latest', 'env', 'none']
+    }, {
       type: 'confirm',
       name: 'useKarma',
       message: 'Enable Karma + Jasmine?',
@@ -25,6 +30,7 @@ module.exports = class extends Generator {
       store: true
     }]
     return this.prompt(prompts).then((answers) => {
+      this.config.set('babelPreset', answers.babelPreset)
       this.config.set('useVuex', answers.useVuex)
       this.config.set('useKarma', answers.useKarma)
     })
@@ -94,8 +100,7 @@ module.exports = class extends Generator {
       'vue-template-compiler',
       'css-loader',
       'babel-core',
-      'babel-loader',
-      'babel-preset-env'
+      'babel-loader'
     ]
     if (this.config.get('useVuex')) {
       dependencies.push('vuex')
@@ -108,6 +113,10 @@ module.exports = class extends Generator {
     }
     if (this.config.get('useKarma')) {
       dependencies.push('babel-polyfill', 'jasmine-core', 'karma', 'karma-jasmine', 'karma-phantomjs-launcher', 'karma-webpack', 'phantomjs-prebuilt', 'inject-loader')
+    }
+    const babelPreset = this.config.get('babelPreset')
+    if (babelPreset !== 'none') {
+      dependencies.push(`babel-preset-${babelPreset}`)
     }
     this.yarnInstall(dependencies, { dev: true })
   }
