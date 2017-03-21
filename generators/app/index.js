@@ -1,18 +1,15 @@
-/* eslint-disable */
 const Generator = require('yeoman-generator')
 const kebabcase = require('lodash.kebabcase')
 
 module.exports = class extends Generator {
   constructor (args, opts) {
     super(args, opts)
-    this.argument('appname', { type: String, required: true });
+    this.argument('appname', { type: String, required: true })
   }
   submodules () {
     this.composeWith(require.resolve('../comp'), { arguments: ['app'] })
-  }
-  another () {
     if (this.config.get('useVuex')) {
-      this.composeWith(require.resolve('../store'), { skipPrompts: true , arguments: ['store'] })
+      this.composeWith(require.resolve('../store'), { skipPrompts: true, arguments: ['store'] })
     }
   }
   prompting () {
@@ -22,9 +19,9 @@ module.exports = class extends Generator {
       message: 'Enable Karma + Jasmine?',
       store: true
     }, {
-      type : 'confirm',
-      name : 'useVuex',
-      message : 'Enable Vuex?',
+      type: 'confirm',
+      name: 'useVuex',
+      message: 'Enable Vuex?',
       store: true
     }]
     return this.prompt(prompts).then((answers) => {
@@ -45,23 +42,37 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('package.json'),
       this.destinationPath('package.json'),
-      { appname: kebabcase(this.options.appname), useKarma: this.config.get('useKarma'), name: this.user.git.name(), email: this.user.git.email() }
+      {
+        appname: kebabcase(this.options.appname),
+        useKarma: this.config.get('useKarma'),
+        babelPreset: this.config.get('babelPreset'),
+        name: this.user.git.name(),
+        email: this.user.git.email()
+      }
     )
     this.fs.copyTpl(
       this.templatePath('webpack.config.js'),
       this.destinationPath('webpack.config.js'),
-      { styleLang: this.config.get('styleLang') }
+      {
+        styleLang: this.config.get('styleLang')
+      }
     )
     this.fs.copyTpl(
       this.templatePath('public'),
       this.destinationPath('public'),
-      { title: this.options.appname }
+      {
+        title: this.options.appname
+      }
     )
 
     this.fs.copyTpl(
       this.templatePath('src/entry.js'),
       this.destinationPath('src/entry.js'),
-      { useVuex: this.config.get('useVuex'), templateLang: this.config.get('templateLang'), styleLang: this.config.get('styleLang') }
+      {
+        useVuex: this.config.get('useVuex'),
+        templateLang: this.config.get('templateLang'),
+        styleLang: this.config.get('styleLang')
+      }
     )
 
     if (this.config.get('useKarma')) {
@@ -95,7 +106,7 @@ module.exports = class extends Generator {
     if (this.config.get('styleLang') === 'scss') {
       dependencies.push('node-sass', 'sass-loader')
     }
-    if(this.config.get('useKarma')) {
+    if (this.config.get('useKarma')) {
       dependencies.push('babel-polyfill', 'jasmine-core', 'karma', 'karma-jasmine', 'karma-phantomjs-launcher', 'karma-webpack', 'phantomjs-prebuilt', 'inject-loader')
     }
     this.yarnInstall(dependencies, { dev: true })

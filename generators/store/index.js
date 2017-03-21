@@ -1,11 +1,10 @@
-/* eslint-disable */
 const Generator = require('yeoman-generator')
 const startcase = require('lodash.startcase')
 
 module.exports = class extends Generator {
   constructor (args, opts) {
     super(args, opts)
-    this.argument('storename', { type: String, required: true });
+    this.argument('storename', { type: String, required: true })
   }
   initializing () {
     if (!this.config.get('useVuex')) {
