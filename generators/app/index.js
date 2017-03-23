@@ -4,7 +4,7 @@ const kebabcase = require('lodash.kebabcase')
 module.exports = class extends Generator {
   constructor (args, opts) {
     super(args, opts)
-    this.argument('appname', { type: String, required: true })
+    this.argument('appname', { type: String, required: false })
   }
   submodules () {
     this.composeWith(require.resolve('../comp'), { arguments: ['app'] })
@@ -19,6 +19,18 @@ module.exports = class extends Generator {
       message: 'Babel Preset',
       choices: ['latest', 'env', 'none']
     }, {
+      type: 'input',
+      name: 'projectName',
+      message: 'Enter your project name:',
+      default: this.options.appname,
+      validate (name) {
+        if (name === '') {
+          return 'A project name is required.'
+        } else {
+          return true
+        }
+      }
+    }, {
       type: 'confirm',
       name: 'useKarma',
       message: 'Enable Karma + Jasmine?',
@@ -30,6 +42,7 @@ module.exports = class extends Generator {
       store: true
     }]
     return this.prompt(prompts).then((answers) => {
+      this.options.appname = answers.projectName
       this.config.set('babelPreset', answers.babelPreset)
       this.config.set('useVuex', answers.useVuex)
       this.config.set('useKarma', answers.useKarma)
