@@ -1,5 +1,4 @@
 const Generator = require('yeoman-generator')
-const kebabcase = require('lodash.kebabcase')
 
 module.exports = class extends Generator {
   constructor (args, opts) {
@@ -52,7 +51,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('README.md'),
       this.destinationPath('README.md'),
-      { appname: kebabcase(this.options.appname) }
+      { appname: this.options.appname }
     )
     this.fs.copyTpl(
       this.templatePath('gitignore'),
@@ -62,7 +61,7 @@ module.exports = class extends Generator {
       this.templatePath('package.json'),
       this.destinationPath('package.json'),
       {
-        appname: kebabcase(this.options.appname),
+        appname: this.options.appname,
         useKarma: this.config.get('useKarma'),
         babelPreset: this.config.get('babelPreset'),
         name: this.user.git.name(),

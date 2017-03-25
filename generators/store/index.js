@@ -1,5 +1,4 @@
 const Generator = require('yeoman-generator')
-const startcase = require('lodash.startcase')
 
 module.exports = class extends Generator {
   constructor (args, opts) {
@@ -14,12 +13,13 @@ module.exports = class extends Generator {
   writing () {
     this.fs.copyTpl(
       this.templatePath('Store.js'),
-      this.destinationPath(`src/Vuex/${startcase(this.options.storename)}.js`)
+      this.destinationPath(`src/Vuex/${this.options.storename}.js`)
     )
     if (this.config.get('useKarma')) {
       this.fs.copyTpl(
         this.templatePath('Store.spec.js'),
-        this.destinationPath(`src/Vuex/${startcase(this.options.storename)}.spec.js`)
+        this.destinationPath(`src/Vuex/${this.options.storename}.spec.js`),
+        { storename: this.options.storename }
       )
     }
   }

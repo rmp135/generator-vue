@@ -1,7 +1,7 @@
 /* eslint-env jasmine */
-import StoreInjector from 'inject-loader!./Store.js'
+import <% storename %>Injector from 'inject-loader!./<% storename %>.js'
 
-describe('Store', () => {
+describe('<% storename %>', () => {
   it('should pass', () => {
     expect(true).toBe(true)
   })
