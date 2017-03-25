@@ -1,12 +1,13 @@
 import Vue from 'vue'
 <% if (useVuex) { -%>
 import Vuex from 'vuex'
-import Store from './Vuex/Store.js'
+Vue.use(Vuex)
+import store from './Vuex/Store.js'
 <% } -%>
-import app from './app.vue'
+import app from './App.vue'
 
 new Vue({
   el: '#app',<% if (useVuex) { %>
-  store: new Vuex(Store),<% } %>
+  store: new Vuex.Store(store),<% } %>
   render: (h) => h(app)
 })
