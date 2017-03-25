@@ -1,15 +1,15 @@
 <% if (styleLang === 'css') { -%>
 <style>
-  #app {
+  .<%= compname %> {
     background-color: red;
   }
-  #app p {
+  .<%= compname %> p {
     font-weight: bold;
   }
 </style>
 <% } else if (styleLang === 'scss') { -%>
 <style lang="scss">
-  #app {
+  .<%= compname %> {
     background-color: red;
     p {
       font-weight: bold;
@@ -19,12 +19,12 @@
 <% } -%>
 <% if (templateLang === 'pug') { -%>
 <template lang="pug">
-  #app
+  .<%= compname %>
     p {{ foo }}
 </template>
 <% } else if (templateLang === 'html') { -%>
 <template>
-  <div id="app">
+  <div class="<%= compname %>">
     <p>{{ foo }}</p>
   </div>
 </template>

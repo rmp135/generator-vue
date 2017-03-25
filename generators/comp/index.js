@@ -26,13 +26,20 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('Component.vue'),
       this.destinationPath(`src/${this.options.compname}.vue`),
-      { templateLang: this.config.get('templateLang'), styleLang: this.config.get('styleLang') }
+      {
+        compname: this.options.compname,
+        templateLang: this.config.get('templateLang'),
+        styleLang: this.config.get('styleLang')
+      }
     )
     if (this.config.get('useKarma')) {
       this.fs.copyTpl(
         this.templatePath('Component.spec.js'),
         this.destinationPath(`src/${this.options.compname}.spec.js`),
-        { useVuex: this.config.get('useVuex') }
+        {
+          compname: this.options.compname,
+          useVuex: this.config.get('useVuex')
+        }
       )
     }
   }

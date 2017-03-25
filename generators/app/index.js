@@ -6,18 +6,13 @@ module.exports = class extends Generator {
     this.argument('appname', { type: String, required: false })
   }
   submodules () {
-    this.composeWith(require.resolve('../comp'), { arguments: ['app'] })
+    this.composeWith(require.resolve('../comp'), { arguments: ['App'] })
     if (this.config.get('useVuex')) {
-      this.composeWith(require.resolve('../store'), { skipPrompts: true, arguments: ['store'] })
+      this.composeWith(require.resolve('../store'), { skipPrompts: true, arguments: ['Store'] })
     }
   }
   prompting () {
     const prompts = [{
-      type: 'list',
-      name: 'babelPreset',
-      message: 'Babel Preset',
-      choices: ['latest', 'env', 'none']
-    }, {
       type: 'input',
       name: 'projectName',
       message: 'Enter your project name:',
@@ -29,6 +24,11 @@ module.exports = class extends Generator {
           return true
         }
       }
+    }, {
+      type: 'list',
+      name: 'babelPreset',
+      message: 'Babel Preset',
+      choices: ['latest', 'env', 'none']
     }, {
       type: 'confirm',
       name: 'useKarma',
@@ -104,7 +104,7 @@ module.exports = class extends Generator {
       )
     }
   }
-  install () {
+  _install () {
     const dependencies = [
       'vue',
       'webpack',

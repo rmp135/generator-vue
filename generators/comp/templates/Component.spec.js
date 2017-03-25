@@ -4,20 +4,20 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 <% } -%>
-import app from './app.vue'
+import <%= compname %> from './<%= compname %>.vue'
 
-describe('App', () => {
+describe('<%= compname %>', () => {
   let Ctor, vm
   beforeEach(() => {
-    Ctor = Vue.extend(app)
+    Ctor = Vue.extend(<%= compname %>)
     vm = new Ctor()
   })
   describe('mounted', () => {
     it('should pass', function () {
-      <% if (useVuex) { -%>
+<% if (useVuex) { -%>
       const store = {}
       vm = new Ctor({ store: new Vuex.Store(store) })
-      <% } %>
+<% } -%>
       expect(true).toBe(true)
     })
   })
